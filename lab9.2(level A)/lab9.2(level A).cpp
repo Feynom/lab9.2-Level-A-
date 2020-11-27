@@ -79,11 +79,17 @@ int main()
             cout << "Прізвище: "; 
             cin.get();
             cin.sync();
-            getline(cin, B_surname); cout << endl;            
-            cout << "Спеціальність(0 - Інформатика, 1 - Радіоелектроніка, 2 - Комп'ютерні науки,";
-            cout << "\n3 - Комп'ютерна інженерія, 4 - Програмне забезпечення): "; cout << endl;
-            cout << "Спеціальність: "; cin >> B_speciality;
-            cout << "Оцінка з третього предмету: "; cin >> B_grade_computer_science; cout << endl;
+            getline(cin, B_surname); cout << endl;  
+            do
+            {
+                cout << "Спеціальність(0 - Інформатика, 1 - Радіоелектроніка, 2 - Комп'ютерні науки,";
+                cout << "\n3 - Комп'ютерна інженерія, 4 - Програмне забезпечення): "; cout << endl;
+                cout << "Спеціальність: "; cin >> B_speciality;
+            } while (B_speciality < 0 || B_speciality > 4);
+            do
+            {
+                cout << "Оцінка з третього предмету: "; cin >> B_grade_computer_science; cout << endl;
+            } while (B_grade_computer_science < 0 || B_grade_computer_science > 5);
             if (found = Bin_Search(S, N, B_surname, B_speciality, B_grade_computer_science) != -1)
                 cout << "Це студент №" << found + 1 << endl;
             else

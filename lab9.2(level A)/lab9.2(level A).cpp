@@ -30,7 +30,7 @@ void Print_first(Students* S, const int N);
 void Phys_Sort(Students* S, const int N);
 int* Index_sort(Students* S, const int N);
 void Print_Index_Sorted(Students* S, int* I, const int N);
-int Bin_Search(Students* S, const int N, const string surname, const int speciality, const int grade_computer_science);
+bool Bin_Search(Students* S, const int N, const string surname, const int speciality, const int grade_computer_science);
 
 int main()
 {
@@ -45,7 +45,6 @@ int main()
     string B_surname;
     int B_speciality;
     int B_grade_computer_science;
-    int found;
 
     int MenuItem;
     do
@@ -90,10 +89,10 @@ int main()
             {
                 cout << "Оцінка з третього предмету: "; cin >> B_grade_computer_science; cout << endl;
             } while (B_grade_computer_science < 0 || B_grade_computer_science > 5);
-            if (found = Bin_Search(S, N, B_surname, B_speciality, B_grade_computer_science) != -1)
-                cout << "Це студент №" << found + 1 << endl;
+            if (Bin_Search(S, N, B_surname, B_speciality, B_grade_computer_science) == 1)
+                cout << "Так, такий студент є!" << endl;
             else
-                cout << "Не знайдено такго студента!" << endl;
+                cout << "Не знайдено такого студента!" << endl;
             break;
         case 0:
             return 0;
@@ -230,7 +229,7 @@ void Print_Index_Sorted(Students* S, int* I, const int N)
     }
     cout << "=========================================================================================" << endl << endl;
 }
-int Bin_Search(Students* S, const int N, const string surname, const int speciality, const int grade_computer_science)
+bool Bin_Search(Students* S, const int N, const string surname, const int speciality, const int grade_computer_science)
 {
     int L = 0, R = N - 1, m;
     do
@@ -242,7 +241,7 @@ int Bin_Search(Students* S, const int N, const string surname, const int special
             &&
             (S[m].grade_computer_science == grade_computer_science))
         {
-            return m;
+            return 1;
         }
 
         if ((S[m].grade_computer_science < grade_computer_science)
@@ -264,5 +263,5 @@ int Bin_Search(Students* S, const int N, const string surname, const int special
             R = m - 1;
         }
     } while (L <= R);
-        return -1;
+        return 0;
 }
